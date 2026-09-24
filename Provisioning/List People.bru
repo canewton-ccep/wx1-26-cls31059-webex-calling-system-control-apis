@@ -1,0 +1,33 @@
+meta {
+  name: List People
+  type: http
+  seq: 2
+}
+
+get {
+  url: https://webexapis.com/v1/people
+  body: none
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
+
+docs {
+  List all people in an org — the List People endpoint, unfiltered.
+
+  **Parameters**: none set on this example; the endpoint supports optional query filters like
+  `email`, `displayName`, `locationId`, and `max` (see "Get People" in this folder for a filtered
+  example using `email`).
+
+  Reference: https://developer.webex.com/docs/api/v1/people/list-people
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

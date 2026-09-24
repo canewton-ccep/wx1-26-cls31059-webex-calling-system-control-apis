@@ -1,0 +1,39 @@
+meta {
+  name: List Specific Device for given user
+  type: http
+  seq: 2
+}
+
+get {
+  url: https://webexapis.com/v1/devices/{{deviceid}}?personId={{personid}}
+  body: none
+  auth: inherit
+}
+
+params:query {
+  personId: {{personid}}
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
+
+docs {
+  Gets the details of one specific device, scoped to a specific user — the "Get Device Details"
+  endpoint with an added `personId` filter.
+
+  **Parameters**
+  - `deviceId` (path) — the ID of the device to look up. Bound to `{{deviceid}}`, an example
+    workspace desk phone.
+  - `personId` (query) — the person the device should belong to. Bound to `{{personid}}`.
+
+  **Usage**: This request will give you the details of a specific device associated with a specific
+  user. Use "List Devices" or "Get Devices For User" first to find a `deviceId`, then use this to
+  drill into that one device's full detail record.
+
+  Reference: https://developer.webex.com/docs/api/v1/devices/get-device-details
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

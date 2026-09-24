@@ -1,0 +1,47 @@
+meta {
+  name: List Hotdesk Sessions
+  type: http
+  seq: 4
+}
+
+get {
+  url: https://webexapis.com/v1/hotdesk/sessions?personId={{personid}}
+  body: none
+  auth: inherit
+}
+
+params:query {
+  personId: {{personid}}
+}
+
+headers {
+  Content-Type: application/json
+  ~Authorization: Bearer {{CDRToken}}
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
+
+docs {
+  Lists active Hot Desking sessions for a given person — i.e. which workspace/device they're
+  currently checked into, since hot-desk users don't "own" a device the way personal-line users do.
+
+  **Parameters**
+  - `personId` (query) — the person to check for an active hot-desk session. Bound to
+    `{{personid}}`.
+
+  **Usage**: Take the `workspaceId` from this response and feed it into "Get Devices For User" or
+  "Find Hardware for WorkspaceID" to list the physical devices in that workspace.
+
+  Reference: no exact public developer.webex.com page documenting this specific "list hotdesk
+  sessions" REST call could be confirmed at the time of writing. Closest related documentation:
+  https://developer.webex.com/docs/api/v1/workspaces (see the `hotdeskingStatus` field) and
+  https://developer.webex.com/docs/api/v1/device-call-settings (Hoteling/device-member settings
+  used to manage hot desking). Please verify the exact endpoint reference with Cisco/Webex support
+  before publishing further.
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

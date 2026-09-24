@@ -1,0 +1,54 @@
+meta {
+  name: Add All Created Calls
+  type: http
+  seq: 6
+}
+
+post {
+  url: https://webexapis.com/v1/webhooks
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+  ~Authorization: Bearer {{personalAccessToken}}
+}
+
+body:json {
+  {
+    "name": "all calls dest2",
+    "targetUrl": "{{webhookTargetUrl}}",
+    "resource": "telephony_calls",
+    "event": "created",
+    "ownedBy":"org",
+    "filter":"personId=Y2lzY29zcGFyazovL3VzL1BFT1BMRS9kYzg0MzI4NC1iOGMzLTRkZmMtYTZhMy02MzVhNzY3MTU4MDQ"
+  }
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+  forwardAuthorizationHeader: false
+}
+
+docs {
+  Creates a webhook scoped to a single event type and filtered to one person's calls — a narrower
+  example of the Create a Webhook endpoint, demonstrating the `filter` field.
+
+  **Body** (`body:json`)
+  - `name` — a human-readable label for the webhook.
+  - `targetUrl` — bound to `{{webhookTargetUrl}}` (same shared example destination used by the
+    other three webhook-creation requests in this folder).
+  - `resource` — `telephony_calls`.
+  - `event` — `created` only (fires when a new call is created, not on every state change).
+  - `ownedBy` — `org` for an organization-wide webhook.
+  - `filter` — a resource-specific filter expression; here `personId=...` restricts events to calls
+    involving that one person. The ID used matches the collection's `{{personid}}` example user.
+
+  Reference: https://developer.webex.com/docs/api/v1/webhooks/create-a-webhook
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

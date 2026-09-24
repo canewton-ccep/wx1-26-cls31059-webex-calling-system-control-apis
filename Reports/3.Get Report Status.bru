@@ -1,0 +1,96 @@
+meta {
+  name: 3.Get Report Status
+  type: http
+  seq: 3
+}
+
+get {
+  url: https://webexapis.com/v1/reports/{{reportid}}
+  body: none
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
+
+docs {
+  Step 3 of the Reports flow — the "Get Report Details" endpoint. Take the report ID from the
+  response in "2.Create Report" and populate the collection variable `{{reportid}}` with the
+  reference. Use this endpoint to check whether the report is ready to download.
+
+  **Parameters**
+  - `reportId` (path) — bound to `{{reportid}}`.
+
+  **Usage**: Poll this until `status` shows as complete, then take the `downloadURL` field from the
+  response and use it in "4.Get Report" to actually retrieve the file.
+
+  Reference: https://developer.webex.com/docs/api/v1/reports/get-report-details
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}
+
+example {
+  name: example
+  
+  request: {
+    url: https://webexapis.com/v1/reports/{{reportid}}
+    method: GET
+    mode: none
+    headers: {
+      Accept: application/json
+    }
+  }
+  
+  response: {
+    headers: {
+      vary: Origin
+      x-content-type-options: nosniff
+      trackingid: ROUTERGW_cb85332e-7527-480a-8085-b713345e979b
+      cache-control: no-cache, no-store
+      date: Mon, 09 Feb 2026 09:32:55 GMT
+      pragma: no-cache
+      server: istio-envoy
+      strict-transport-security: max-age=31536000; includeSubDomains
+      x-envoy-upstream-service-time: 330
+      content-type: application/json
+      content-length: 615
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "items": [
+            {
+              "title": "Calling Detailed Call History",
+              "service": "Webex Calling",
+              "startDate": "2025-12-13",
+              "endDate": "2026-01-12",
+              "siteList": "null",
+              "created": "2026-02-09 09:32:35",
+              "createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yY2MwMTQ4Mi0xOWFhLTRmZjUtYWMyNS1lNjczYTdkNTA3ZWQ",
+              "scheduleFrom": "api",
+              "status": "manual_processing",
+              "downloadDomain": "https://reportservice-a.webex.com/",
+              "downloadURL": "https://reportservice-a.webex.com/api?reportId=Y2lzY29zcGFyazovL3VzL1JFUE9SVC81NTdiOTMxZDE4MDU0ODk5OGQxZTYwYjUxNTAwYTA0OQ",
+              "Id": "Y2lzY29zcGFyazovL3VzL1JFUE9SVC81NTdiOTMxZDE4MDU0ODk5OGQxZTYwYjUxNTAwYTA0OQ"
+            }
+          ],
+          "numberOfReports": 1
+        }
+      '''
+    }
+  }
+}

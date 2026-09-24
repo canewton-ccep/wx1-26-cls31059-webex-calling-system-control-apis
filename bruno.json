@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Wx1 '26-CLS31059-Webex Calling System Control APIs",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

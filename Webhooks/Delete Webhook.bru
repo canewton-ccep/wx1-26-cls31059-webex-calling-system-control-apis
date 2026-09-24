@@ -1,0 +1,37 @@
+meta {
+  name: Delete Webhook
+  type: http
+  seq: 5
+}
+
+delete {
+  url: https://webexapis.com/v1/webhooks/{{webhookId}}
+  body: formUrlEncoded
+  auth: inherit
+}
+
+body:form-urlencoded {
+  "{}":
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+  forwardAuthorizationHeader: false
+}
+
+docs {
+  Permanently removes a webhook — the Delete a Webhook endpoint. This is a destructive,
+  irreversible operation: once deleted, that webhook subscription is gone and must be recreated
+  from scratch (with a new ID) if you want it back.
+
+  **Parameters**
+  - `webhookId` (path) — the ID of the webhook to delete. Bound to the collection variable
+    `{{webhookId}}`, populated with an example ID — replace it with the ID of the webhook you
+    actually want to remove (from "List Webhooks").
+
+  Reference: https://developer.webex.com/docs/api/v1/webhooks/delete-a-webhook
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

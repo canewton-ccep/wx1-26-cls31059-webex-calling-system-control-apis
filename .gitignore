@@ -1,0 +1,6 @@
+.DS_Store
+
+# Personal Bruno environments (cloned from environments/Template.bru) — keep local only.
+# Template.bru itself stays tracked since it ships with no real values.
+environments/*.bru
+!environments/Template.bru

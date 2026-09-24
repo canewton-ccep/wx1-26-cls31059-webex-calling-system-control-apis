@@ -1,0 +1,53 @@
+meta {
+  name: Update Person
+  type: http
+  seq: 3
+}
+
+put {
+  url: https://webexapis.com/v1/people/{{personid}}
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+}
+
+body:json {
+  {
+      "phoneNumbers": [
+          {
+              "type": "work",
+              "value": ""
+          }
+      ],
+      "displayName": "Agent User"
+  }
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
+
+docs {
+  Updates an existing person's profile — the "Update a Person" endpoint. **Note: PUT replaces the
+  whole record**, so any field you omit from the body may be cleared; fetch the person first (e.g.
+  with "List Specific Person") and merge your changes into the full object for real use.
+
+  **Parameters**
+  - `personId` (path) — the person to update. Bound to `{{personid}}`, defined at the collection's
+    top level.
+
+  **Body** (`body:json`)
+  - `phoneNumbers` — array of `{type, value}` phone number objects; example sets a blank `work`
+    number as a placeholder for you to fill in.
+  - `displayName` — the person's display name.
+
+  Reference: https://developer.webex.com/docs/api/v1/people/update-a-person
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

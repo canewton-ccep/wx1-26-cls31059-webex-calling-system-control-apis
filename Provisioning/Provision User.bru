@@ -1,0 +1,83 @@
+meta {
+  name: Provision User
+  type: http
+  seq: 9
+}
+
+post {
+  url: https://webexapis.com/v1/people?callingData=true
+  body: json
+  auth: none
+}
+
+params:query {
+  callingData: true
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+}
+
+body:json {
+  {
+      "emails": [
+          "API.Guide.User@presentation.com"
+      ],
+      "phoneNumbers": [
+          {
+              "type": "work",
+              "value": "+12099641257"
+          }
+      ],
+      "extension": "1257",
+      "locationId": "Y2lzY29zcGFyazovL3VzL0xPQ0FUSU9OL2IzZWIwMGNmLWJmNTYtNDEwNi1hNTQ1LWZhYTVmNzVmODk5Mg",
+      "displayName": "API Guide User",
+      "firstName": "API Guide",
+      "lastName": "User",
+      "licenses": [
+          "Y2lzY29zcGFyazovL3VzL0xJQ0VOU0UvNzdkYmVjZTgtOWUwOC00ZTMyLWFjZDItMmYxYTg5YzUwZDlhOkZTU18xYjcyOGZmOS03ZGU4LTRjYjctOTU0MC0yOTMyMGI1YTQyY2I",
+          "Y2lzY29zcGFyazovL3VzL0xJQ0VOU0UvNzdkYmVjZTgtOWUwOC00ZTMyLWFjZDItMmYxYTg5YzUwZDlhOkZNU185ZWNhNzgxNC0zMzEzLTQ2NGYtOTY0Mi0wMjM5ODc1YmM5Zjg",
+          "Y2lzY29zcGFyazovL3VzL0xJQ0VOU0UvNzdkYmVjZTgtOWUwOC00ZTMyLWFjZDItMmYxYTg5YzUwZDlhOkJDU1REXzhjMTllYjRmLWQ4NDctNDliNi1iOTIwLWUyNjdhNmEzYWQ1Nw",
+          "Y2lzY29zcGFyazovL3VzL0xJQ0VOU0UvNzdkYmVjZTgtOWUwOC00ZTMyLWFjZDItMmYxYTg5YzUwZDlhOkNKUFBSTV84NDU4ZTg5OC1mYzFlLTRkODAtYmJkOC1hZDQ5MDVjNDEwMzc",
+          "Y2lzY29zcGFyazovL3VzL0xJQ0VOU0UvNzdkYmVjZTgtOWUwOC00ZTMyLWFjZDItMmYxYTg5YzUwZDlhOkZUQ19hMjQ3MzgyOC1hOTgwLTQ3MmYtODE5ZC02YjljY2UwOGU5MmI",
+          "Y2lzY29zcGFyazovL3VzL0xJQ0VOU0UvNzdkYmVjZTgtOWUwOC00ZTMyLWFjZDItMmYxYTg5YzUwZDlhOkZUTV9mNWZkZTM1Zi00NzA0LTQ2MGEtODEwZi00YzVkMzUyNDFlNjk"
+      ]
+  }
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
+
+docs {
+  This is an example user provisioning request — the "Create a Person" endpoint. The body will
+  require heavy modification for your org to specify things such as license ID's, correct user
+  emails, correct numbers etc. Use the other requests in this collection (List Location, List
+  Licenses, Get Phone Numbers) to get the information to populate this request fully and accurately.
+
+  **Parameters**
+  - `callingData` (query) — set to `true` so the response includes Calling-specific fields (SIP
+    address, extension, etc.) for the new person.
+
+  **Body** (`body:json`) — matches the example values used in the companion deck's "New User Setup"
+  walkthrough:
+  - `emails` — the new user's email address(es); must be unique in the org.
+  - `phoneNumbers` — array of `{type, value}`; `value` should be a number obtained from "Get Phone
+    Numbers" with `available=true`.
+  - `extension` — the extension to assign, typically matching the number.
+  - `locationId` — the Location to place this person in, from "List Location".
+  - `displayName` / `firstName` / `lastName` — the person's name fields.
+  - `licenses` — array of License IDs from "List Licenses" to assign to this person.
+
+  **Heads up**: this request is set to `auth: none` with no Authorization header configured, unlike
+  the other Provisioning requests (`auth: inherit`). As shipped it will get a 401 — switch it to
+  `auth: inherit` (or add your own bearer token) before use. Left unchanged here since that's a
+  functional/auth change outside the scope of this documentation pass.
+
+  Reference: https://developer.webex.com/docs/api/v1/people/create-a-person
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

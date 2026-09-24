@@ -1,0 +1,66 @@
+meta {
+  name: CDR_Feed
+  type: http
+  seq: 2
+}
+
+get {
+  url: https://analytics-calling.webexapis.com/v1/cdr_feed?endTime={{startTimeMinus5Min}}&startTime={{startTimeMinus12Hrs}}
+  body: none
+  auth: inherit
+}
+
+params:query {
+  endTime: {{startTimeMinus5Min}}
+  startTime: {{startTimeMinus12Hrs}}
+}
+
+headers {
+  Accept: application/json
+  ~Authorization: Bearer {{cdrToken}}
+}
+
+script:pre-request {
+  const nowMinus5Min = new Date();
+  nowMinus5Min.setMinutes(nowMinus5Min.getMinutes() - 5);
+  const isoMinus5Min = nowMinus5Min.toISOString();
+  
+  const nowMinus12Hrs = new Date();
+  nowMinus12Hrs.setHours(nowMinus12Hrs.getHours() - 12);
+  const isoMinus12Hrs = nowMinus12Hrs.toISOString();
+  
+  bru.setVar("startTimeMinus5Min", isoMinus5Min);
+  bru.setVar("startTimeMinus12Hrs", isoMinus12Hrs);
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+  forwardAuthorizationHeader: false
+}
+
+docs {
+  Fetches Detailed Call History (JSON) for a rolling window, computed automatically by the
+  pre-request script — the "Get Detailed Call History" endpoint.
+
+  **Parameters**
+  - `endTime` (query) — set by the pre-request script to "now minus 5 minutes" (`startTimeMinus5Min`).
+    Data must be requested no more recently than 5 minutes ago.
+  - `startTime` (query) — set by the pre-request script to "now minus 12 hours"
+    (`startTimeMinus12Hrs`). The API allows up to 48 hours in the past; this example uses 12 hours.
+
+  **Auth**: uses the collection's inherited OAuth2 token. A disabled fallback `Authorization`
+  header (bound to `{{CDRToken}}`) is included in case you'd rather use a static personal access
+  token with CDR rights instead — enable it and disable the collection auth if so.
+
+  **Requirements**: the token needs the `spark-admin:calls_read` scope.
+
+  *Legacy note: this used to also require enabling "Detailed Call History API Access" for the
+  token's owning admin in Control Hub. That toggle is now obsolete/no longer necessary — the
+  scope alone is sufficient.*
+
+  Reference: https://developer.webex.com/calling/docs/api/v1/reports-detailed-call-history/get-detailed-call-history
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

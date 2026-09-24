@@ -1,0 +1,43 @@
+meta {
+  name: Get Devices For User
+  type: http
+  seq: 1
+}
+
+get {
+  url: https://webexapis.com/v1/devices?workspaceId={{workspaceid}}
+  body: none
+  auth: inherit
+}
+
+params:query {
+  workspaceId: {{workspaceid}}
+  ~personId: {{personid}}
+}
+
+headers {
+  accept: application/json
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
+
+docs {
+  Lists devices, filtered either by Workspace or by Person — the List Devices endpoint.
+
+  **Parameters**
+  - `workspaceId` (query, active) — bound to `{{workspaceid}}`, an example workspace/place ID.
+  - `personId` (query, disabled — enable this one and disable `workspaceId` to filter by user
+    instead) — bound to `{{personid}}`, defined at the top level of this collection.
+
+  **Usage**: As shipped this returns all devices in the example workspace. Toggle off `workspaceId`
+  and toggle on `personId` in the query params to instead return all devices owned by a specific
+  person.
+
+  Reference: https://developer.webex.com/docs/api/v1/devices/list-devices
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

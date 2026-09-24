@@ -1,0 +1,58 @@
+meta {
+  name: WxC User Phone: API Dial
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://webexapis.com/v1/telephony/calls/dial
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+  Authorization: Bearer {{personaltoken}}
+}
+
+body:json {
+  {
+    "endpointId": "{{callingDeviceId}}",
+    "destination": "+18005532447"
+  }
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
+
+docs {
+  Dials a destination using a person's *personal* virtual line (their softphone, desk phone, and
+  mobile client will all ring, unless a specific `endpointId` is given) — the Call Controls "Dial"
+  endpoint.
+
+  **Parameters/Headers**
+  - `Authorization` — bound to `{{personaltoken}}` (placeholder). Use a personal access token from
+    the user who owns the phone. This can be copied from developer.webex.com or generated
+    programmatically as per the guide https://developer.webex.com/admin/docs/authentication. This
+    request needs a token with the `spark:calls_write` scope, owned by the user whose line is being
+    controlled.
+
+  **Body** (`body:json`)
+  - `endpointId` — bound to `{{callingDeviceId}}`; the specific device to ring. Omit this field
+    entirely to ring all of that user's registered devices at once.
+  - `destination` — the number or address to dial.
+
+  **Usage**: The response returns a `callId` — save it to use with "WxC User: API Hang Up" or other
+  call-management operations.
+
+  See https://github.com/TeamCCEP/DeskphoneControl for more info and a little web app that will
+  help visualise these APIs.
+
+  Reference: https://developer.webex.com/docs/api/v1/call-controls/dial
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

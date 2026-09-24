@@ -1,0 +1,44 @@
+meta {
+  name: Get Device Members
+  type: http
+  seq: 5
+}
+
+get {
+  url: https://webexapis.com/v1/telephony/config/devices/{{deviceid}}/members
+  body: none
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+}
+
+vars:pre-request {
+  deviceid: Y2lzY29zcGFyazovL3VybjpURUFNOnVzLWVhc3QtMl9hL0NBTExJTkdfREVWSUNFLzg0NWEzZWMyLTdjMDktNGUzMi1hY2QyLTJmMWE4OWM1MGQ5YQ==
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
+
+docs {
+  Lists the people/lines assigned to a specific Webex Calling device — the "Get Device Members"
+  endpoint.
+
+  **Parameters**
+  - `deviceId` (path) — the device to inspect. This request overrides the collection-level
+    `{{deviceid}}` variable with a request-level `vars:pre-request` block set to the `callingDeviceId`
+    (not the plain `webexDeviceId`) of a device — use the `callingDeviceId` value returned from
+    "List Devices" here, not the generic device ID.
+
+  **Usage**: This will show you any users that are associated with the lines that exist on the
+  given device ID. Note the `lineType` field in the response — it tells you whether a given line is
+  that user's primary line or a shared-call-appearance of another user's line on this device.
+
+  Reference: https://developer.webex.com/docs/api/v1/device-call-settings/get-device-members
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

@@ -1,0 +1,37 @@
+meta {
+  name: List Specific Person
+  type: http
+  seq: 3
+}
+
+get {
+  url: https://webexapis.com/v1/people/{{personid}}/
+  body: none
+  auth: inherit
+}
+
+headers {
+  accept: application/json
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
+
+docs {
+  Gets the full profile for a single person by their Person ID — the "Get Person Details" endpoint.
+
+  **Parameters**
+  - `personId` (path) — the unique ID of the person to retrieve. Bound to the collection variable
+    `{{personid}}`, populated with an example "Agent User".
+
+  **Usage**: Useful once you already have a Person ID (e.g. from "List People") and want the full
+  detail record — licenses, phone numbers, roles, etc. — for that one user, without paging through
+  the whole org.
+
+  Reference: https://developer.webex.com/docs/api/v1/people/get-person-details
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

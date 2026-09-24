@@ -1,0 +1,103 @@
+meta {
+  name: 2.Create Report
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://webexapis.com/v1/reports
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+}
+
+body:json {
+  {
+    "templateId": 500,
+    "startDate": "2025-12-13",
+    "endDate": "2026-01-12"
+  }
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
+
+docs {
+  Step 2 of the Reports flow — kicks off asynchronous generation of a report. This returns
+  immediately with an `Id`; the report itself is generated in the background.
+
+  **Parameters/Body** (`body:json`)
+  - `templateId` — the numeric template ID from "1.Get Report Templates" (e.g. `500` for "Calling
+    Detailed Call History").
+  - `startDate` / `endDate` — the date range to report on (`YYYY-MM-DD`). Note: 13 months worth of
+    reports are available, but each individual report has a 31-day max duration.
+
+  **Usage**: Make a note of the `Id` in the response, and use it to populate `{{reportid}}` for
+  "3.Get Report Status".
+
+  See also: https://help.webex.com/en-us/article/nmug598/Reports-for-Your-Cloud-Collaboration-Portfolio
+
+  Reference: https://developer.webex.com/docs/api/v1/reports/create-a-report
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}
+
+example {
+  name: example
+  
+  request: {
+    url: https://webexapis.com/v1/reports
+    method: POST
+    mode: json
+    headers: {
+      Content-Type: application/json
+      Accept: application/json
+    }
+  
+    body:json: {
+      {
+        "templateId": 500,
+        "startDate": "2025-12-13",
+        "endDate": "2026-01-12"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      vary: Origin
+      x-content-type-options: nosniff
+      trackingid: ROUTERGW_1878a830-f591-4263-875a-5760cb7e3783
+      date: Mon, 09 Feb 2026 09:32:35 GMT
+      pragma: no-cache
+      server: istio-envoy
+      strict-transport-security: max-age=31536000; includeSubDomains
+      x-envoy-upstream-service-time: 2487
+      content-type: application/json
+      content-length: 93
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "items": {
+            "Id": "Y2lzY29zcGFyazovL3VzL1JFUE9SVC81NTdiOTMxZDE4MDU0ODk5OGQxZTYwYjUxNTAwYTA0OQ"
+          }
+        }
+      '''
+    }
+  }
+}

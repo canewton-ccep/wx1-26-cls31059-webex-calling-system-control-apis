@@ -1,0 +1,53 @@
+meta {
+  name: Add Firehose Calls
+  type: http
+  seq: 3
+}
+
+post {
+  url: https://webexapis.com/v1/webhooks
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+  ~Authorization: Bearer {{personalAccessToken}}
+}
+
+body:json {
+  {
+    "name": "all calls",
+    "targetUrl": "{{webhookTargetUrl}}",
+    "resource": "telephony_calls",
+    "event": "all",
+    "ownedBy":"org"
+  }
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+  forwardAuthorizationHeader: false
+}
+
+docs {
+  Creates an org-wide webhook that fires for every Calling call event — the Create a Webhook
+  endpoint, scoped to the `telephony_calls` resource.
+
+  **Body** (`body:json`)
+  - `name` — a human-readable label for the webhook.
+  - `targetUrl` — where Webex POSTs event notifications. Bound to the collection variable
+    `{{webhookTargetUrl}}`; replace with your own receiving endpoint.
+  - `resource` — `telephony_calls` scopes this to Calling call events specifically.
+  - `event` — `all` subscribes to every call event type (created, answered, disconnected, etc). See
+    "Add All Created Calls" for a narrower example filtered to just call creation.
+  - `ownedBy` — `org` makes this an organization-wide webhook (requires an admin-scoped token),
+    rather than one scoped only to the creating user.
+
+  Reference: https://developer.webex.com/docs/api/v1/webhooks/create-a-webhook
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

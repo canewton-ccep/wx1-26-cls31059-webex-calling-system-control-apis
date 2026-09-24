@@ -1,0 +1,36 @@
+meta {
+  name: List Devices
+  type: http
+  seq: 6
+}
+
+get {
+  url: https://webexapis.com/v1/devices
+  body: none
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
+
+docs {
+  Lists all of the devices in an org — the List Devices endpoint, with no filters applied here.
+
+  **Parameters**: none set on this example, though the endpoint supports optional query filters
+  such as `personId`, `workspaceId`, `locationId`, and `mac` (see the Hardware Inventory folder for
+  filtered variants of this same request).
+
+  **Usage**: Good starting point to see every registered device and note its `id` / `callingDeviceId`
+  / `webexDeviceId` for use in other requests (e.g. "Get Device Members", Phone Control).
+
+  Reference: https://developer.webex.com/docs/api/v1/devices/list-devices
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

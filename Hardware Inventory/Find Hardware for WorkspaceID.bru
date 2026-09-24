@@ -1,0 +1,48 @@
+meta {
+  name: Find Hardware for WorkspaceID
+  type: http
+  seq: 5
+}
+
+get {
+  url: https://webexapis.com/v1/devices?workspaceId={{workspaceid}}
+  body: none
+  auth: inherit
+}
+
+params:query {
+  workspaceId: {{workspaceid}}
+}
+
+headers {
+  Accept: application/json
+  ~Authorization: Bearer {{CDRToken}}
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
+
+docs {
+  Lists all hardware devices registered to a specific Workspace (a physical space like a meeting
+  room or hot desk), using the `workspaceId` query parameter on the List Devices endpoint.
+
+  **Parameters**
+  - `workspaceId` (query, required for this example) — the Workspace/Place ID to filter devices by.
+    Bound to the collection variable `{{workspaceid}}` (see the collection-level docs), which is
+    populated with a worked example. Swap it for a real Workspace ID from "List Workspaces" to try
+    your own.
+
+  **Usage**: Run "List Workspaces" first to find a `workspaceId`, then use it here to see every
+  device assigned to that space (useful for shared/hot-desk areas rather than a single owned user).
+
+  Note: this collection variable is named `workspaceid` (lowercase) to match the value already
+  defined at the top level; an unused empty `workspaceId` (camelCase) variable also exists for
+  ad-hoc testing with your own ID.
+
+  Reference: https://developer.webex.com/docs/api/v1/devices/list-devices
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

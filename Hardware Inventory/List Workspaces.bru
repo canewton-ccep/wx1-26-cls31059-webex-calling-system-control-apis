@@ -1,0 +1,36 @@
+meta {
+  name: List Workspaces
+  type: http
+  seq: 7
+}
+
+get {
+  url: https://webexapis.com/v1/workspaces
+  body: none
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
+
+docs {
+  Lists all Workspaces (physical spaces like meeting rooms, shared desks, or hot-desk areas) in the
+  organization.
+
+  **Parameters**: none set on this example — the endpoint supports optional query filters
+  (`locationId`, `workspaceLocationId`, `capacity`, `type`, etc.) if you want to narrow the results.
+
+  **Usage**: Use this to find a Workspace's ID, then feed it into "Find Hardware for WorkspaceID" or
+  "Get Devices For User" to see the devices assigned to that space.
+
+  Reference: https://developer.webex.com/docs/api/v1/workspaces/list-workspaces
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

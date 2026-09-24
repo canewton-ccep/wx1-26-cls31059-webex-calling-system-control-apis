@@ -1,0 +1,30 @@
+meta {
+  name: List Location
+  type: http
+  seq: 8
+}
+
+get {
+  url: https://webexapis.com/v1/locations
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
+
+docs {
+  Lists all available Locations (sites) in an org — the List Locations endpoint.
+
+  **Parameters**: none — always returns every Location, including its ID, address, and time zone.
+
+  **Usage**: Step 1 of the "New User Setup" flow — find a `locationId` before calling "Provision
+  User", or before running "Find devices by location" in the Hardware Inventory folder.
+
+  Reference: https://developer.webex.com/docs/api/v1/locations/list-locations
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

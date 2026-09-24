@@ -1,0 +1,41 @@
+meta {
+  name: Get Prefferred Answer Endpoint
+  type: http
+  seq: 4
+}
+
+get {
+  url: https://webexapis.com/v1/telephony/config/people/{{personid}}/preferredAnswerEndpoint
+  body: none
+  auth: inherit
+}
+
+headers {
+  accept: application/json
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
+
+docs {
+  Query a specific user to find their devices that are available for control — the "Get Preferred
+  Answer Endpoint" endpoint.
+
+  **Parameters**
+  - `personId` (path) — the user whose controllable devices/endpoints you want to list. Bound to
+    `{{personid}}`.
+
+  **Usage**: Returns each endpoint (softphone app, desk phone, etc.) registered to that user, along
+  with its `id` — this is one of two ways to find a `callingDeviceId`/`endpointId` for the personal
+  Call Controls requests (List Devices being the other).
+
+  See https://github.com/TeamCCEP/DeskphoneControl for more info and a little web app that will
+  help visualise these APIs.
+
+  Reference: https://developer.webex.com/calling/docs/api/v1/user-call-settings-2-2/get-preferred-answer-endpoint
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

@@ -1,0 +1,54 @@
+meta {
+  name: Add Firehose
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://webexapis.com/v1/webhooks
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+  ~Authorization: Bearer {{personalAccessToken}}
+}
+
+body:json {
+  {
+    "name": "all",
+    "targetUrl": "{{webhookTargetUrl}}",
+    "resource": "all",
+    "event": "all"
+  }
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+  forwardAuthorizationHeader: false
+}
+
+docs {
+  Creates the broadest possible "firehose" webhook — every resource, every event — the Create a
+  Webhook endpoint with no scoping applied.
+
+  **Body** (`body:json`)
+  - `name` — a human-readable label for the webhook.
+  - `targetUrl` — where Webex POSTs event notifications. Bound to the collection variable
+    `{{webhookTargetUrl}}`; replace with your own receiving endpoint.
+  - `resource` — `all` subscribes to every resource type Webex supports webhooks for (messages,
+    memberships, calls, meetings, etc), not just Calling.
+  - `event` — `all` subscribes to every event type for those resources.
+
+  **Usage note**: this is intentionally the noisiest possible webhook, useful for exploring what
+  events exist during a demo. For production use, prefer the narrower "Add Firehose Calls" (scoped
+  to Calling) or "Add All Created Calls" (scoped to one event type) as templates.
+
+  Reference: https://developer.webex.com/docs/api/v1/webhooks/create-a-webhook
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

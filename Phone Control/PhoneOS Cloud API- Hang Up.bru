@@ -1,0 +1,58 @@
+meta {
+  name: PhoneOS Cloud API: Hang Up
+  type: http
+  seq: 5
+}
+
+post {
+  url: https://webexapis.com/v1/xapi/command/Call.Disconnect
+  body: json
+  auth: none
+}
+
+headers {
+  Accept: application/json
+  Content-Type: application/json
+  Authorization: Bearer {{workspacetoken}}
+}
+
+body:json {
+  {
+    "deviceId": "{{webexDeviceId}}",
+    "arguments": {
+      "CallId": 0,
+      "LineId": 1
+    }
+  }
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
+
+docs {
+  Sends a "Call.Disconnect" xAPI command directly to a specific Workspace/Room device — the
+  PhoneOS/RoomOS xAPI command-execution endpoint, the Workspace-device counterpart to "WxC User:
+  API Hang Up".
+
+  **Parameters/Headers**
+  - `Authorization` — bound to `{{workspacetoken}}` (placeholder). Can be a user token via an
+    integration, or a Service App token — either way it needs the `spark:xapi_commands` scope.
+
+  **Body** (`body:json`)
+  - `deviceId` — bound to `{{webexDeviceId}}`; the target device's ID.
+  - `arguments.CallId` / `arguments.LineId` — identify which call/line on the device to disconnect,
+    returned by "PhoneOS Cloud API: Dial" when the call was created.
+
+  **Usage**: Returns a 200 OK with no response body on success.
+
+  Reference: https://developer.webex.com/docs/api/v1/xapi/execute-command
+
+  Per-command xAPI reference: https://roomos.cisco.com/xapi/Command.Call.Disconnect/
+  (also: https://phoneos.cisco.com/xapi?release=ebce6e9968ba7924022bef9285c67cae50af6915&domain=Call&object=Call+Disconnect
+  — note the original doc link here pointed at "Call+Dial" instead of "Call+Disconnect"; corrected)
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

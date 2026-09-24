@@ -1,0 +1,60 @@
+meta {
+  name: PhoneOS Cloud API: Dial
+  type: http
+  seq: 4
+}
+
+post {
+  url: https://webexapis.com/v1/xapi/command/Call.Dial
+  body: json
+  auth: none
+}
+
+headers {
+  Accept: application/json
+  Content-Type: application/json
+  Authorization: Bearer {{workspacetoken}}
+}
+
+body:json {
+  {
+    "deviceId": "{{webexDeviceId}}",
+    "arguments": {
+      "Line": 1,
+      "Number": "+18005532447"
+    }
+  }
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
+
+docs {
+  Sends a "Call.Dial" xAPI command directly to a specific Workspace/Room device — the PhoneOS/RoomOS
+  xAPI command-execution endpoint. Unlike the personal-line Dial request, this bypasses user
+  profiles entirely and targets hardware directly.
+
+  **Parameters/Headers**
+  - `Authorization` — bound to `{{workspacetoken}}` (placeholder). Can be a user token via an
+    integration, or a Service App token — either way it needs the `spark:xapi_commands` scope. This
+    credential cannot control personal devices.
+
+  **Body** (`body:json`)
+  - `deviceId` — bound to `{{webexDeviceId}}`; the target device's ID (from "List Devices" in this
+    folder — note this is the plain device `id`/`webexDeviceId`, not `callingDeviceId`).
+  - `arguments.Line` — the line/appearance on the device to use.
+  - `arguments.Number` — the number to dial.
+
+  Used for Workspace Devices (Room Kits, Boards, MPP phones) — ideal for in-room automation, digital
+  signage, and remote hardware management.
+
+  Reference: https://developer.webex.com/docs/api/v1/xapi/execute-command
+
+  Per-command xAPI reference: https://roomos.cisco.com/xapi/Command.Dial/
+  (also: https://phoneos.cisco.com/xapi?release=ebce6e9968ba7924022bef9285c67cae50af6915&domain=Call&object=Call+Dial)
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

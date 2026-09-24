@@ -1,0 +1,45 @@
+meta {
+  name: Get People
+  type: http
+  seq: 2
+}
+
+get {
+  url: https://webexapis.com/v1/people?email={{testUserEmail}}
+  body: none
+  auth: inherit
+}
+
+params:query {
+  email: {{testUserEmail}}
+  ~locationId:
+  ~max:
+  ~id:
+  ~displayName:
+}
+
+headers {
+  Accept: application/json
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
+
+docs {
+  Use this to get all of the details of a given person. Useful for pulling back license ID's etc to
+  build further downstream requests that need that detail — the List People endpoint.
+
+  **Parameters**
+  - `email` (query, active) — filters to the person with this exact email address. Bound to the
+    collection variable `{{testUserEmail}}`.
+  - `locationId`, `max`, `displayName`, `id` (query, disabled) — alternative filters you can enable
+    instead of (or alongside) `email`: scope to a Location, cap the page size, match a display name,
+    or look up a specific Person ID.
+
+  Reference: https://developer.webex.com/docs/api/v1/people/list-people
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

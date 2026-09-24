@@ -1,0 +1,35 @@
+meta {
+  name: List Devices
+  type: http
+  seq: 3
+}
+
+get {
+  url: https://webexapis.com/v1/devices
+  body: none
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
+
+docs {
+  List available devices to retrieve a device identifier to use in the phone control requests — the
+  List Devices endpoint.
+
+  **Parameters**: none set here — returns every device. Note the `callingDeviceId` field for
+  personal-line dial/hangup requests, and the plain `id`/`webexDeviceId` for xAPI (PhoneOS/RoomOS)
+  requests, since Personal Devices and Workspace Devices use different ID fields — see the "Send
+  Call Control Commands" step in the companion deck.
+
+  Reference: https://developer.webex.com/docs/api/v1/devices/list-devices
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

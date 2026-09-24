@@ -1,0 +1,53 @@
+meta {
+  name: Add Phone Status Alert
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://webexapis.com/v1/webhooks
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+  Authorization: Bearer {{personalAccessToken}}
+}
+
+body:json {
+  {
+    "name": "all",
+    "targetUrl": "{{webhookTargetUrl}}",
+    "resource": "all",
+    "event": "all"
+  }
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+  forwardAuthorizationHeader: false
+}
+
+docs {
+  Creates a broad "all resources, all events" webhook, authenticated with a static bearer token
+  rather than the collection's OAuth2 auth (`auth: none` + an explicit `Authorization` header) —
+  same underlying Create a Webhook endpoint as "Add Firehose", included as an example of using a
+  personal access token directly instead of the OAuth flow.
+
+  **Parameters/Headers**
+  - `Authorization` — bound to the Environment variable `{{personalAccessToken}}` (see the
+    collection's top-level docs). Set it to a token from developer.webex.com to run this request
+    as-is without relying on the collection's
+    OAuth2 setup.
+
+  **Body** (`body:json`) — identical shape to "Add Firehose": `name`, `targetUrl` (bound to
+  `{{webhookTargetUrl}}`), `resource: all`, `event: all`.
+
+  Reference: https://developer.webex.com/docs/api/v1/webhooks/create-a-webhook
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

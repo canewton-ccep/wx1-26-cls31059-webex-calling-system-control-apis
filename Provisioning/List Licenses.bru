@@ -1,0 +1,32 @@
+meta {
+  name: List Licenses
+  type: http
+  seq: 7
+}
+
+get {
+  url: https://webexapis.com/v1/licenses
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
+
+docs {
+  Lists all of the licenses available in an org, along with their ID, so you can use them in
+  assignment operations — the List Licenses endpoint.
+
+  **Parameters**: none — this always returns every license in the org, including
+  `totalUnits`/`consumedUnits` so you can see remaining capacity.
+
+  **Usage**: Step 1 of the "New User Setup" flow — find the license IDs you need (e.g. Webex
+  Calling - Professional) before calling "Provision User".
+
+  Reference: https://developer.webex.com/docs/api/v1/licenses/list-licenses
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

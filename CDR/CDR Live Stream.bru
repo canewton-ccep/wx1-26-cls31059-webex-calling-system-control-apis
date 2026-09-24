@@ -1,0 +1,65 @@
+meta {
+  name: CDR Live Stream
+  type: http
+  seq: 3
+}
+
+get {
+  url: https://analytics-calling.webexapis.com/v1/cdr_stream?endTime={{startTimeMinus1Min}}&startTime={{startTimeMinus2Hrs}}
+  body: none
+  auth: inherit
+}
+
+params:query {
+  endTime: {{startTimeMinus1Min}}
+  startTime: {{startTimeMinus2Hrs}}
+}
+
+headers {
+  Accept: application/json
+}
+
+script:pre-request {
+  const nowMinus1Min = new Date();
+  nowMinus1Min.setMinutes(nowMinus1Min.getMinutes() - 1);
+  const isoMinus1Min = nowMinus1Min.toISOString();
+  
+  const nowMinus2Hrs = new Date();
+  nowMinus2Hrs.setHours(nowMinus2Hrs.getHours() - 2);
+  const isoMinus2Hrs = nowMinus2Hrs.toISOString();
+  
+  bru.setVar("startTimeMinus1Min", isoMinus1Min);
+  bru.setVar("startTimeMinus2Hrs", isoMinus2Hrs);
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+  forwardAuthorizationHeader: false
+}
+
+docs {
+  Fetches Live Stream Detailed Call History (JSON, available ~1 minute after a call ends) for a
+  rolling window, computed automatically by the pre-request script — the "Get Live Stream Detailed
+  Call History" endpoint. Best for near-real-time dashboards.
+
+  **Parameters**
+  - `endTime` (query) — set by the pre-request script to "now minus 1 minute" (`startTimeMinus1Min`).
+  - `startTime` (query) — set by the pre-request script to "now minus 2 hours" (`startTimeMinus2Hrs`).
+
+  **Constraints**: `startTime` cannot be more than 12 hours in the past, and the window between
+  `startTime` and `endTime` cannot exceed 2 hours in a single request. This endpoint is also rate
+  limited to roughly 1 request per minute — expect a 403/428 if you poll faster.
+
+  **Auth**: uses the collection's inherited OAuth2 token, which needs the `spark-admin:calls_read`
+  scope.
+
+  *Legacy note: this used to also require the token's owning admin to have "Detailed Call History
+  API Access" enabled in Control Hub. That toggle is now obsolete/no longer necessary — the scope
+  alone is sufficient.*
+
+  Reference: https://developer.webex.com/calling/docs/api/v1/reports-live-stream-detailed-call-history/get-live-stream-detailed-call-history
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

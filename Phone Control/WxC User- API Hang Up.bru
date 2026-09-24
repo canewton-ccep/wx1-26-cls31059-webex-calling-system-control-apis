@@ -1,0 +1,52 @@
+meta {
+  name: WxC User: API Hang Up
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://webexapis.com/v1/telephony/calls/hangup
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Authorization: Bearer {{personaltoken}}
+}
+
+body:json {
+  {
+    "callId": "Y2lzY29zcGFyazovL3VzL0NBTEwvY2FsbGhhbGYtNzEzOTEzNzg1ODow"
+  }
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
+
+docs {
+  Hangs up an active call on a person's personal virtual line, by Call ID — the Call Controls
+  "Hangup" endpoint. (Removed a stray duplicate empty `Authorization` header that was left over
+  above the real one during this documentation pass — harmless, but some HTTP clients reject
+  duplicate headers outright.)
+
+  **Parameters/Headers**
+  - `Authorization` — bound to `{{personaltoken}}` (placeholder). Use a personal access token from
+    the user who owns the phone. This can be copied from developer.webex.com.
+
+  **Body** (`body:json`)
+  - `callId` — the ID of the call to hang up, returned by "WxC User Phone: API Dial" (or any other
+    call-creating request) when the call started.
+
+  **Usage**: Returns a 200 OK with no response body on success.
+
+  See https://github.com/TeamCCEP/DeskphoneControl for more info and a little web app that will
+  help visualise these APIs.
+
+  Reference: https://developer.webex.com/docs/api/v1/call-controls/hangup
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

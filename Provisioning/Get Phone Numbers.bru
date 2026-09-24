@@ -1,0 +1,39 @@
+meta {
+  name: Get Phone Numbers
+  type: http
+  seq: 1
+}
+
+get {
+  url: https://webexapis.com/v1/telephony/config/numbers
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~available: true
+}
+
+headers {
+  Accept: application/json
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
+
+docs {
+  Use this request to get phone numbers in the org — the "Get Phone Numbers" endpoint. You can
+  toggle the available parameter to only show numbers that are not currently assigned.
+
+  **Parameters**
+  - `available` (query, disabled by default) — when enabled and set to `true`, filters the results
+    to only unassigned numbers, which is useful when you're about to assign one to a new person
+    (see "Provision User").
+
+  Reference: https://developer.webex.com/calling/docs/api/v1/numbers/get-phone-numbers-for-an-organization-with-given-criteria
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

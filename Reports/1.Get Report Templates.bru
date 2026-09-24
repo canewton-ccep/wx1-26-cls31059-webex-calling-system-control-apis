@@ -1,0 +1,35 @@
+meta {
+  name: 1.Get Report Templates
+  type: http
+  seq: 1
+}
+
+get {
+  url: https://webexapis.com/v1/report/templates
+  body: none
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
+
+docs {
+  Step 1 of the Reports flow — lists all available report templates (Reports API, the "flatter" CSV
+  export covering up to 13 months of history) and their numeric `Id` values.
+
+  **Parameters**: none — returns every template available to your org.
+
+  **Usage**: Find the template you want (e.g. "Calling Detailed Call History") and note its `Id`
+  (e.g. `500`) and `maxDays`, then use it to populate the body of "2.Create Report".
+
+  Reference: https://developer.webex.com/docs/api/v1/report-templates/list-report-templates
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}

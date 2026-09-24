@@ -1,0 +1,42 @@
+meta {
+  name: Find devices by location
+  type: http
+  seq: 6
+}
+
+get {
+  url: https://webexapis.com/v1/devices?locationId={{locationId}}
+  body: none
+  auth: inherit
+}
+
+params:query {
+  locationId: {{locationId}}
+}
+
+headers {
+  Accept: application/json
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+}
+
+docs {
+  Lists all devices assigned anywhere within a specific Location (site), using the `locationId`
+  query parameter on the List Devices endpoint.
+
+  **Parameters**
+  - `locationId` (query) — the Location ID to filter devices by. Bound to the collection variable
+    `{{locationId}}`, which is empty by default — populate it with an ID from "List Location" before
+    running this request.
+
+  **Usage**: Handy for a full hardware audit of a single site, e.g. "how many devices are deployed
+  at Site1?"
+
+  Reference: https://developer.webex.com/docs/api/v1/devices/list-devices
+
+  ---
+  *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
+}
