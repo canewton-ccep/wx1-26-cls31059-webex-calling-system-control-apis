@@ -1,7 +1,7 @@
 meta {
   name: List Webhooks
   type: http
-  seq: 4
+  seq: 3
 }
 
 get {
@@ -22,15 +22,15 @@ settings {
 
 docs {
   Lists all webhooks registered for this org/token — the List Webhooks endpoint.
-
+  
   **Parameters**: none — returns every webhook you (or the org, if `ownedBy: org` was used at
   creation) can see.
-
+  
   **Usage**: Use this to find the `id` of a webhook you want to remove with "Delete Webhook", or to
   confirm a webhook created with one of the "Add ..." requests registered correctly.
-
+  
   Reference: https://developer.webex.com/docs/api/v1/webhooks/list-webhooks
-
+  
   ---
   *Documentation written by AI (Claude) as a companion to the WebexOne 2026 API Overview session.*
 }
