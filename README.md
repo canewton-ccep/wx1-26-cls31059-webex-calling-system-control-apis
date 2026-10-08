@@ -28,6 +28,22 @@ every bearer token is a reference to a Bruno **Environment variable** (`{{client
 the repo is safe to clone, fork, and share — you supply the real values once, locally, in a Bruno
 Environment (Bruno's built-in per-user, git-safe credential store).
 
+## Installation — get this collection open in Bruno
+
+1. **Install Bruno** (if you don't already have it) — download the desktop app from
+   [usebruno.com/downloads](https://www.usebruno.com/downloads) (macOS, Windows, and Linux), or
+   install it via a package manager, e.g. `brew install bruno` on macOS.
+2. **Get a local copy of this repository**, either:
+   - Clone it: `git clone https://github.com/canewton-ccep/wx1-26-cls31059-webex-calling-system-control-apis.git`, or
+   - Click **Code → Download ZIP** on this page and extract it, if you don't use git.
+3. **Open it in Bruno**: launch Bruno → **Open Collection** → select the folder you just
+   cloned/extracted. Bruno reads `bruno.json` at the folder root and loads the whole collection in
+   one step — every request folder (CDR, Hardware Inventory, Phone Control, Provisioning, Reports,
+   Webhooks) and the `Template` environment appear automatically. There's no separate per-file
+   import step; opening the folder *is* importing it.
+4. Continue to **Before you start** below to register your own Integration and fill in your
+   Environment — nothing will run successfully until you do.
+
 ## Before you start — using your own registered Integration with Bruno
 
 ### Step 1 — Register your own Integration
